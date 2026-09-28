@@ -2,6 +2,8 @@ import os
 
 import discord
 from dotenv import load_dotenv
+from commands.ping import ping
+from commands.player import player
 
 
 load_dotenv()
@@ -17,10 +19,12 @@ intents = discord.Intents.default()
 
 client = discord.Client(intents=intents)
 tree = discord.app_commands.CommandTree(client)
+GUILD_ID = 1334972415071092738
+GUILD = discord.Object(id=GUILD_ID)
+tree.add_command(ping)
+tree.add_command(player)
 
-@tree.command(name="ping", description="Comprueba si el bot está funcionando")
-async def ping(interaction: discord.Interaction):
-    await interaction.response.send_message("🏓 Pong!")
+
 
 @client.event
 async def on_ready():
